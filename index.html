@@ -394,17 +394,21 @@
     </div>
   </div>
 
-  <script>
+<script>
     function checkPassword() {
-      const input = document.getElementById('password-input').value.trim().toLowerCase();
+      // Usuwa zbędne spacje, zamienia na małe litery
+      const rawInput = document.getElementById('password-input').value.toLowerCase().trim();
+      const input = rawInput.replace(/\s+/g, ' ');
       const errorMsg = document.getElementById('error-msg');
       
-      // Akceptuje warianty z "katy i bruno"
+      // Akceptuje Katy i Bruno w każdej konfiguracji (małe/duże litery, ze spójnikiem lub bez)
       if (
-        input === "Katy i Bruno" || 
-        input === "Bruno i Katy" ||
+        input === "katy i bruno" || 
+        input === "bruno i katy" ||
+        input === "katy bruno" ||
+        input === "bruno katy" ||
         input === "katy, bruno" ||
-        input === "katy bruno"
+        (input.includes("katy") && input.includes("bruno"))
       ) {
         document.getElementById('lock-screen').style.display = 'none';
         document.getElementById('main-content').style.display = 'flex';
